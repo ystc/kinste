@@ -35,8 +35,8 @@ void ShuttlePageControl::create(int width, int height)
   connect(shuttle_window, SIGNAL(userInterfaceClosed()),
           this, SLOT(interfaceClosed()));
 
-  shuttle_window->move(400, 0);
-  shuttle_window->resize(width - 400, height);
+  shuttle_window->move(500, 0);
+  shuttle_window->resize(width - 500, height);
   shuttle_window->show();
   shuttle->setShuttleWindow(shuttle_window);
 

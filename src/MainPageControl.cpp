@@ -54,7 +54,7 @@ void MainPageControl::show(int argc, char* argv[])
 
   main_window->setObjectName("MainPage");
   main_window->move(0, 0);
-  main_window->resize(400, display_height);
+  main_window->resize(500, display_height);
   main_window->show();
 
   connect(main_window, SIGNAL(closeShuttlePageSignal(Shuttle*, int)),

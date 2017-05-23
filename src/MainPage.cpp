@@ -52,20 +52,26 @@ MainPage::MainPage(int argc, char* argv[], MainPageControl* controller,
 
   logo->setObjectName("logo");
   body->setObjectName("body");
-  foot->setObjectName("footer");
+  //foot->setObjectName("footer");
   list->setObjectName("listWidget");
+  addShuttle->setProperty("button", true);
+  deleteShuttle->setProperty("button", true);
+  disconnectShuttle->setProperty("button", true);
+  save->setProperty("button", true);
+  addShuttleLabel->setProperty("executeLabel", true);
+  addShuttleLine->setProperty("executeLine", true);
 
   bodyGrid->setAlignment(Qt::AlignHCenter);
   bodyGrid->addWidget(addShuttleLabel, 0, 0);
-  bodyGrid->addWidget(addShuttleLine, 1, 0);
-  bodyGrid->addWidget(addShuttle, 1, 1);
+  bodyGrid->addWidget(addShuttleLine, 1, 0, 1, 2);
+  bodyGrid->addWidget(addShuttle, 1, 2);
   bodyGrid->addWidget(list, 2, 0, 1, 3);
   bodyGrid->addWidget(deleteShuttle, 3, 0);
   bodyGrid->addWidget(disconnectShuttle, 3, 1);
   bodyGrid->addWidget(save, 3, 2);
-  bodyGrid->setColumnStretch(0, 5);
-  bodyGrid->setColumnStretch(1, 5);
-  bodyGrid->setColumnStretch(2, 5);
+  //bodyGrid->setColumnStretch(0, 5);
+  //bodyGrid->setColumnStretch(1, 5);
+  //bodyGrid->setColumnStretch(2, 5);
   body->setLayout(bodyGrid);
 
   mainGrid->addWidget(logo, 0, 0);
