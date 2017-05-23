@@ -1,0 +1,310 @@
+#UIMainWindow{
+	background-color: #666666;
+	font-size: 20px;
+}
+
+#log{
+	font-size: 14px;
+	background-color: #f1f1ef;
+	color: black;
+	min-height: 200%;
+	border: 3px solid #4C4C4C;
+	border-radius: 5%;
+}
+
+#statusGroup{
+  border: 3px solid #4C4C4C;
+  border-radius: 5%;
+  height: 50%;
+  background-color: #f1f1ef;
+}
+
+#bodyGroup{
+	border: 3px solid #656565;
+	background-color: #656565;
+}
+
+#leftGroup{
+  border: 3px solid #656565;
+  border-radius: 5%;
+  color: #000000;
+  margin-top: 35%;
+  font-size: 20px;
+}
+
+#leftGroup::title {
+  subcontrol-origin: margin;
+  left: 10%;
+	margin-top: 20%;
+}
+
+
+#controlsGroup{
+	border-radius: 5%;
+	border: 3px solid #4C4C4C;
+	background-color: #f1f1ef;
+	max-height: 60%;
+	padding-top: -5%;
+	padding-bottom: -5%;
+}
+
+#mainTabWidget{
+  background-color: #f1f1ef;
+	max-height: 650%;
+}
+
+#mainTabWidget::tab-bar{
+  color: #ffffff;
+}
+
+#mainTabWidget::pane{
+  border: 3px solid #4C4C4C;
+  background-color: #f1f1ef;
+  top: -3px;
+  border-radius: 5%;
+}
+
+#mainTabBar{
+  color: #ffffff;
+  font-size: 20px;
+	background-color: #656565;
+}
+
+#mainTabBar::tab{
+  padding-left: 3%;
+  padding-right: 3%;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  background-color: #656565;
+  min-height: 30%;
+  max-width: 300%;
+	min-width: 150%;
+  border-bottom: 3px solid #4C4C4C;
+  color: #BBBBBB;    
+}
+
+#mainTabBar::tab:selected{
+  background-color: #f1f1ef;
+  border: 3px solid #4C4C4C;
+  border-bottom: 3px solid #f1f1ef;
+  margin-top: 2%;
+  color: #000000;
+  padding-left: -0.5%;
+  padding-right: 2%;
+}
+
+#mainTabBar::tab:!selected:hover{
+  background-color: #7E7E7E;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+}
+
+#mainTabBar::tab:focus{
+  background-color: red;
+}
+
+#listWidget{
+  font-size: 20px;
+  min-width: 250px;
+  max-width: 700px;
+  background-color: #f1f1ef;
+  border: 3px solid #656565;
+	border-radius: 5%;
+	color: #000000;
+}
+
+#listWidget::item:selected{
+  background-color: #BBBBBB;
+  color: #000000;
+}
+
+#listWidget::item{
+  border-bottom: 1px solid gray;
+}
+
+#timer{
+	color: #000000;
+	font-size: 20px;
+	qproperty-alignment: 'AlignCenter';
+}
+
+#calSteerLeftFront{
+          border-image: url(%PATH%/icons/symbol_wheel_lf_icon.png) 1 1 1 1 stretch stretch;
+  /*margin-left: 100%;
+  margin-top: 60%;*/
+}
+
+#calSteerRightFront{
+          border-image: url(%PATH%/icons/symbol_wheel_rf_icon.png) 1 1 1 1 stretch stretch;
+  /*margin-top: 60%;
+  margin-right: 100%;*/
+}
+
+#calSteerLeftRear{           
+          border-image: url(%PATH%/icons/symbol_wheel_lr_icon.png) 1 1 1 1 stretch stretch;
+          /*margin-left: 100%;                                                   
+          margin-bottom: 60%;*/
+}
+
+#calSteerRightRear{           
+          border-image: url(%PATH%/icons/symbol_wheel_rr_icon.png) 1 1 1 1 stretch stretch;
+          /*margin-left: 100%;
+  margin-right: 100%;*/
+}
+
+#calSteerLine{
+  max-width: 40%;
+  font-size: 18px;
+  min-height: 30%
+}
+
+#calSteerGroup{
+  border: none;
+  border-top: 3px solid gray;
+  border-bottom: 3px solid gray;
+  max-height: 200%;
+	font-size: 20px;
+  color: #000000;
+	margin-top: 15%;
+}
+
+#calSteerGroup::title{
+  subcontrol-origin: margin;
+  left: 10%;
+}
+
+[singleCmdsLabel="true"]{
+	qproperty-alignment: 'AlignVCenter | AlignRight';
+	font-size: 20px;
+	color: #000000;
+}
+
+[statusLabel = "true"]{
+  qproperty-alignment: 'AlignVCenter | AlignCenter';	
+	font-size: 20px;
+	max-width: 300%;
+	color: #000000;
+	margin-right: 10%;
+}
+
+[energyBar = "true"]{
+	min-height: 30%;
+  min-width: 200%;
+	max-width: 400%;
+	text-align: center;
+	color: #000000;
+	background-color: #f1f1ef;	
+	margin-right: 5%;
+	border: 3px solid #4C4C4C;
+	border-radius: 10%;
+}
+
+[energyBar = "true"]::chunk{
+	color: green;
+	border-radius: 7;
+}
+
+[executeButton="true"]{
+	font-size: 20px;
+	max-width: 250%;
+}
+
+[goButton="true"]{
+  font-size: 20px;
+  max-width: 100%;
+}
+
+
+[executeLine="true"]{
+  combobox-popup: 0;
+  font-size: 20px;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+[executeLabel = "true"]{
+  qproperty-alignment: 'AlignBottom | AlignLeft';
+  font-size: 20px;
+  color: #000000;
+}
+
+[addToSeqButton="true"]{
+	border: 2px solid #d1d1d1;
+	background-color: #f1f1ef;
+	border-radius: 5%;
+	min-height: 50%;
+	min-width: 50%;
+	max-width: 41%;
+  margin-left: 5%;
+}
+
+[addToSeqButton="true"]:hover{                                                   
+  background-color: #BBBBBB;                                            
+
+}
+
+[addToSeqButton="true"]:disabled{                                                
+  background-color: #f1f1ef;                                              
+}
+
+[groupBox="true"]{
+  border: 3px solid #656565;
+	border-radius: 5%;
+  color: #000000;
+	margin-top: 15%;
+  font-size: 20px;
+}
+
+[groupBox="true"]::title {
+	subcontrol-origin: margin;
+  left: 10%;
+}
+
+[mntButton="true"]{
+  font-size: 20px;
+	color: #000000;
+	max-width: 170%;
+}
+
+[mntLabel="true"]{
+  font-size: 14px;
+  color: #000000;
+}
+
+[mntCheckBox="true"]{
+  margin-top: 10%;
+	font-size: 20px;
+  max-width: 150%;
+  color: #000000;
+}
+
+/*Icon used from flaticon.com - Author: Freepik*/
+[mntCheckBox="true"]::indicator:unchecked{
+	image: url(%PATH%/icons/unchecked.svg);
+}
+
+/*Icon used from flaticon.com - Author: Eleonor Wang*/
+[mntCheckBox="true"]::indicator:checked{
+	image: url(%PATH%/icons/checked.svg); 
+}
+
+[mntLine="true"]{
+  font-size: 20px;
+	max-width: 100%;
+	color: #000000;
+}
+
+[mntCalSteerButton="true"]{
+          background-color: grey;                                        
+          border-radius: 5%;
+          min-width: 50%;
+          max-width: 51%;
+          min-height: 50%;
+          max-height: 51%;
+} 
+
+[mntCalSteerButton="true"]::hover{                                                
+          background-color: #BBBBBB;                                            
+}
+
+

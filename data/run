@@ -1,0 +1,102 @@
+#!/bin/sh
+umask 0133
+{
+  if test -z $TASI_HOME ; then
+    echo "The TASI_HOME environment variable must be set."
+    exit 1
+  fi
+
+  . $TASI_HOME/lib/service_utils.sh
+  unsecure_supervise
+  
+  TASI_ID=$( echo $(pwd) | awk '{cnt=split($0,r,"/");print r[cnt-2];}' - )
+  
+  # Allow ourselves the zero newest core files. If you need a core
+  # dump from the JVM you can increase this to 1 or 2, but beware: JVM
+  # core dumps are huge.
+  keep_x_newest_core_files 0
+
+  /usr/bin/svc -u log
+
+  echo "****************************************************************"
+  echo "                                                                "
+  echo "                YLOG Transport and Storage Interface            "
+  echo "                                                                "
+  echo "                          Shuttle Adapter                       "
+  echo "                                                                "
+  echo "****************************************************************"
+
+  jars="tasi-core.jar tasi-core-assembly.jar"
+  cp=
+  for j in $jars ; do
+    echo Adding $j to classpath.
+    if test -z $cp ; then
+      cp=$TASI_HOME/lib/jar/$j
+    else
+      cp=$cp:$TASI_HOME/lib/jar/$j
+    fi
+  done
+
+  shuttles="
+   SHUT0001 10.212.10.18
+   SHUT0002 10.212.10.212
+   SHUT0003 10.212.10.216
+   SHUT0004 10.212.10.219
+   SHUT0005 10.212.10.46
+   SHUT0006 10.212.10.237 
+   SHUT0007 10.212.10.37
+   SHUT0008 10.212.10.31
+   SHUT0009 10.212.10.34
+   SHUT0010 10.212.10.205
+   SHUT0011 10.212.10.40
+   SHUT0012 10.212.10.43
+   SHUT0013 10.212.10.49
+   SHUT0014 10.212.10.52
+   SHUT0015 10.212.10.55
+   SHUT0017 10.212.10.61
+   SHUT0018 10.212.10.64
+   SHUT0019 10.212.10.67
+   SHUT0020 10.212.10.222
+   SHUT0021 10.212.10.70
+   SHUT0022 10.212.10.73
+   SHUT0023 10.212.10.76
+   SHUT0024 10.212.10.79
+   SHUT0025 10.212.10.82
+   SHUT0026 10.212.10.85
+   SHUT0027 10.212.10.88
+   SHUT0028 10.212.10.91
+   SHUT0099 10.212.10.249
+  "
+
+
+  shuttles=$(echo $shuttles | awk -v OFS="," '$1=$1')
+
+  echo shuttle=$shuttles
+
+  export LANG=en_US.utf8
+
+  exec java                                                                            \
+            -DtasiAppName=SHUTTLE_ADAPTER                                              \
+            -XX:+UseG1GC                                                               \
+            -XX:MaxHeapSize=64M                                                        \
+            -XX:MetaspaceSize=32M                                                      \
+            -XX:MaxGCPauseMillis=200                                                   \
+            -XX:+PrintGCDateStamps                                                     \
+            -XX:+PrintGC                                                               \
+            -XX:+PrintAdaptiveSizePolicy                                               \
+            -XX:+PrintTenuringDistribution                                             \
+            -XX:+ParallelRefProcEnabled                                                \
+            -XX:+PrintReferenceGC                                                      \
+            -cp ${cp}                                                                  \
+            -enableassertions                                                                  \
+            -DremoteUDPPort=9877                                                                  \
+            -DlocalUDPPort=1331                                                                   \
+            -DresendIntervalMs=1000                                                        \
+            -DmaxResends=30                                                                \
+            -DendpointConfigs=$shuttles                                                           \
+            -Dlog4j.configurationFile=${TASI_HOME}/inst/${TASI_ID}/conf/log4j2-shuttle.xml        \
+            -Dconfig.resource=tasi-shuttle-adapter-akka.conf                                      \
+            at.ylog.tasi.core.io.MultiUdpSubsystemAdapterDriver
+
+} 2>&1
+

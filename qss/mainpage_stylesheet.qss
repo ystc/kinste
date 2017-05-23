@@ -1,0 +1,92 @@
+#MainPage{
+	background-color: #666666;
+}
+
+#logo{
+	max-height: 40px;
+	font-size: 35px;
+	color: #000000;
+}
+
+#addShuttleButton{
+	font-size: 20px;
+  min-height: 50%;
+	min-width: 150%;
+	max-width: 200%;
+	color: #000000;
+  border: 2px solid #d1d1d1;
+  border-radius: 5%;
+  background-color: #f1f1ef;
+}
+
+#addShuttleButton:hover{
+	background-color: #bbbbbb;
+}
+
+#deleteShuttleButton{
+  font-size: 20px;
+  min-height: 50%;
+	max-width: 200%;
+	color: #000000;
+	border: 2px solid #d1d1d1;
+  border-radius: 5%;
+  background-color: #f1f1ef;	
+}
+
+#deleteShuttleButton:hover{
+  background-color: #bbbbbb;
+}
+
+#disconnectShuttleButton{
+  font-size: 20px;
+  min-height: 50%;
+	max-width: 200%;
+  color: #000000;
+	border: 2px solid #d1d1d1;
+  border-radius: 5%;
+  background-color: #f1f1ef;
+}
+
+#disconnectShuttleButton:hover{
+  background-color: #bbbbbb;
+}
+
+#listWidget{
+	background-color: #f1f1ef;
+  border: 3px solid #4C4C4C;
+  border-radius: 5%;
+  color: #000000;
+	font-size: 18px;
+}
+
+#listWidget::item:selected{
+  background-color: #BBBBBB;
+  color: #000000;
+}
+
+#listWidget::item{
+  border-bottom: 1px solid gray;
+}
+
+[executeLine="true"]{
+  min-width: 200%;
+  min-height: 50%;
+  border: 2px solid gray;
+  border-radius: 1%;
+  combobox-popup: 0;
+  font-size: 20px;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+[executeLabel = "true"]{
+  qproperty-alignment: 'AlignBottom | AlignLeft';
+  font-size: 20px;
+  color: #000000;
+}
+
+[button="true"]{
+  font-size: 20px;
+  color: #000000;
+  max-width: 170%;
+}
