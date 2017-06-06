@@ -7,6 +7,13 @@
 
 #include "inc/SingleCommandsTab.h"
 
+enum commands{
+  SET_POS,
+  MOVE_TO,
+  LOAD,
+  UNLOAD
+};
+
 //------------------------------------------------------------------------------
 SingleCommandsTab::SingleCommandsTab(QWidget *parent) : QWidget(parent)
 {
@@ -89,50 +96,54 @@ SingleCommandsTab::SingleCommandsTab(QWidget *parent) : QWidget(parent)
 }
 
 //------------------------------------------------------------------------------
+void SingleCommandsTab::execute(int command_tag, QComboBox *command_box)
+{
+  QStringList positions_list;
+  disable();
+  commandTimer->start(10);
+  command_box->setCurrentText(command_box->currentText().toUpper());
+  QString command_string = simplify(command_box -> currentText());
+  emit(saveUsedPosition(command_string));
+
+  switch(command_tag){
+    case 0:
+      emit(executeSetPositionSignal(command_string));
+      break;
+    case 1:
+      positions_list = command_string.split(",");
+      emit(executeMoveSignal(positions_list));
+      break;
+    case 2:
+      emit(executeLoadSignal(command_string));
+      break;
+    case 3:
+      emit(executeUnloadSignal(command_string));
+      break;
+  }
+}
+
+//------------------------------------------------------------------------------
 void SingleCommandsTab::buttonSetPosClicked()
 {
-  disable();
-  commandTimer -> start(10);
-  QString clean_string = simplify(setPositionCombo -> currentText());
-  emit(saveUsedPosition(clean_string));
-  emit(executeSetPositionSignal(clean_string));
+  execute(SET_POS, setPositionCombo);
 }
 
 //------------------------------------------------------------------------------
 void SingleCommandsTab::buttonMoveClicked()
 {
-  cout << "Move to clicked..." << endl;
-  QStringList positions_list;
-  disable();
-
-  commandTimer -> start(10);
-
-  positions_list = simplify(moveCombo -> currentText()).split(",");
-
-  emit(saveUsedPosition(simplify(moveCombo -> currentText())));
-  emit(executeMoveSignal(positions_list));
+  execute(MOVE_TO, moveCombo);
 }
 
 //------------------------------------------------------------------------------
 void SingleCommandsTab::buttonLoadClicked()
 {
-  cout << "Load clicked..." << endl;
-  commandTimer -> start(10);
-  disable();
-  QString clean_string = simplify(loadCombo -> currentText());
-  emit(saveUsedPosition(clean_string));
-  emit(executeLoadSignal(clean_string));
+  execute(LOAD, loadCombo);
 }
 
 //------------------------------------------------------------------------------
 void SingleCommandsTab::buttonUnloadClicked()
 {
-  cout << "Unload clicked..." << endl;
-  commandTimer -> start(10);
-  disable();
-  QString clean_string = simplify(unloadCombo -> currentText());
-  emit(saveUsedPosition(clean_string));
-  emit(executeUnloadSignal(clean_string));
+  execute(UNLOAD, unloadCombo);
 }
 
 //------------------------------------------------------------------------------

@@ -57,6 +57,7 @@ void ShuttleControl::gotSensorData(QStringList data)
 void ShuttleControl::changeCurrentData(QString current_position, float benergy,
                                        float cenergy)
 {
+  cout << "Position: " <<   current_position.toStdString() << endl;
   emit(setData(current_position, benergy, cenergy));
 }
 

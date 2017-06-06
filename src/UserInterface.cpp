@@ -287,10 +287,7 @@ void UserInterface::setShuttleData(QString current_position, float benergy,
   batteryEnergyBar -> setValue(benergy);
   capsEnergyBar -> setValue(cenergy);
 
-  if(current_position.size() > 10)
-  {
-    labelPosition -> setText(tr("Pos: %1").arg(current_position));
-  }
+  labelPosition -> setText(tr("Pos: %1").arg(current_position));
 }
 
 //------------------------------------------------------------------------------
@@ -451,11 +448,11 @@ void UserInterface::setConnectionStatus(bool shuttle_is_online)
   sequenceTab -> setConnectionStatus(shuttle_is_online);
   if(shuttle_is_online)
   {
-    emit(connection(1));
+    emit(connection(1, sequence_running));
   }
   else
   {
-    emit(connection(0));
+    emit(connection(0, sequence_running));
   }
 }
 

@@ -25,16 +25,7 @@ MainPageControl::MainPageControl(QObject *parent) : QObject(parent)
 //------------------------------------------------------------------------------
 MainPageControl::~MainPageControl()
 {
-  QFile file("data/shuttles.dat");
-
-  if(file.open(QFile::WriteOnly)) {
-    for(int count = 0; count < shuttle_counter; count++){
-      QString tem_data = shuttleList.at(count)->getShuttleName()
-          + " " + shuttleList.at(count)->getShuttleIp() + "\n";
-      file.write(tem_data.toLocal8Bit());
-    }
-    file.close();
-  }
+  saveShuttleList();
 
   for(int delete_count = 0; delete_count < shuttle_counter; delete_count++){
     delete shuttleList.at(delete_count)->getController();
@@ -84,7 +75,6 @@ void MainPageControl::show(int argc, char* argv[])
     else if(strcmp(argv[1], "-f") == 0){
       QString file_name = "";
       file_name.append(argv[2]);
-      cout << "file name: " << file_name.toStdString() << endl;
       QFile file(file_name);
 
       if(file.open(QFile::ReadOnly)) {
@@ -122,6 +112,21 @@ void MainPageControl::show(int argc, char* argv[])
 }
 
 //------------------------------------------------------------------------------
+void MainPageControl::saveShuttleList()
+{
+  QFile file("data/shuttles.dat");
+
+  if(file.open(QFile::WriteOnly)) {
+    for(int count = 0; count < shuttle_counter; count++){
+      QString tem_data = shuttleList.at(count)->getShuttleName()
+          + " " + shuttleList.at(count)->getShuttleIp() + "\n";
+      file.write(tem_data.toLocal8Bit());
+    }
+    file.close();
+  }
+}
+
+//------------------------------------------------------------------------------
 void MainPageControl::addShuttleToList(Shuttle *newShuttle)
 {
   cout << "adding shuttle to list" << endl;
@@ -138,8 +143,8 @@ void MainPageControl::addShuttleToList(Shuttle *newShuttle)
 
   shuttle_counter++;
   shuttleList.append(newShuttle);
-  connect(pageController, SIGNAL(forwardConnectionSignal(int,QString)),
-          this, SLOT(setConnection(int, QString)));
+  connect(pageController, SIGNAL(forwardConnectionSignal(int, QString, bool)),
+          this, SLOT(setConnection(int, QString, bool)));
   connect(pageController, SIGNAL(shuttleWindowClosed()),
           this, SLOT(setWindowFlag()));
 
@@ -234,9 +239,10 @@ Shuttle* MainPageControl::searchForIP(QString ip)
 }
 
 //------------------------------------------------------------------------------
-void MainPageControl::setConnection(int connected, QString name)
+void MainPageControl::setConnection(int connected, QString name,
+                                    bool sequence_status)
 {
-  main_window->setConnection(connected, name);
+  main_window->setConnection(connected, name, sequence_status);
 }
 
 //------------------------------------------------------------------------------

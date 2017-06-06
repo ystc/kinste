@@ -324,6 +324,9 @@ void MaintenanceTab::buildLayout()
   setLayout(mainGrid);
 
   cout << "MntTab built" << endl;
+
+  resetConfig->setDisabled(1);
+  loadConfig->setDisabled(1);
 }
 
 //------------------------------------------------------------------------------
@@ -560,7 +563,14 @@ void MaintenanceTab::emitSetRightRear()
 //------------------------------------------------------------------------------
 void MaintenanceTab::emitCalibrateSaveConfig()
 {
-  emit(calibrateSignal(3, 0, 0, 0, 0));
+  QMessageBox::StandardButton reply;
+  reply = QMessageBox::question(this, "Save",
+                                "<font size = 5>Save Configuration?</font>",
+                                QMessageBox::Yes|QMessageBox::No);
+
+  if (reply == QMessageBox::Yes) {
+   emit(calibrateSignal(3, 0, 0, 0, 0));
+  }
 }
 
 //------------------------------------------------------------------------------

@@ -55,10 +55,11 @@ class MainPageControl : public QObject
 
   public slots:
      void showShuttlePage(QListWidgetItem *current_item);
-     void setConnection(int connection, QString name);
+     void setConnection(int connection, QString name, bool sequence_status);
      void removeShuttleFromList(Shuttle *shuttle, int list_position);
      void disconnectShuttlePage(Shuttle *shuttle, int list_position);
      void setWindowFlag();
+     void saveShuttleList();
 };
 
 #endif // MAINPAGECONTROL_H

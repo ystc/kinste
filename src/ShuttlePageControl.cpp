@@ -30,8 +30,8 @@ void ShuttlePageControl::create(int width, int height)
 {
   shuttle_window = new UserInterface(shuttle);
   shuttle_window->setObjectName("UIMainWindow");
-  connect(shuttle_window, SIGNAL(connection(int)),
-          this, SLOT(setConnection(int)));
+  connect(shuttle_window, SIGNAL(connection(int, bool)),
+          this, SLOT(setConnection(int, bool)));
   connect(shuttle_window, SIGNAL(userInterfaceClosed()),
           this, SLOT(interfaceClosed()));
 
@@ -52,9 +52,10 @@ void ShuttlePageControl::create(int width, int height)
 }
 
 //------------------------------------------------------------------------------
-void ShuttlePageControl::setConnection(int connection)
+void ShuttlePageControl::setConnection(int connection, bool sequence_status)
 {
-  emit(forwardConnectionSignal(connection, shuttle->getShuttleName()));
+  emit(forwardConnectionSignal(connection, shuttle->getShuttleName(),
+                               sequence_status));
 }
 
 //------------------------------------------------------------------------------

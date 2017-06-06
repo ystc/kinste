@@ -32,10 +32,10 @@ class MainPage : public QWidget
     MainPage(int argc, char* argv[], MainPageControl* controller,
              QString directory_path, QWidget* parent = 0);
 
-     void setConnection(int connected, QString name);
-     QListWidget *list;
-     QPushButton *addShuttle, *deleteShuttle, *disconnectShuttle, *save;
-     QLineEdit *addShuttleLine;
+    void setConnection(int connected, QString name, bool sequence_status);
+    QListWidget *list;
+    QPushButton *addShuttle, *deleteShuttle, *disconnectShuttle, *save;
+    QLineEdit *addShuttleLine;
 
   private:
     int row_counter, shuttle_counter, arg_count;
@@ -47,9 +47,9 @@ class MainPage : public QWidget
     QListWidgetItem *item;
     Shuttle *newShuttle, *tempShuttle;
 
-
   protected:
     void closeEvent(QCloseEvent *);
+    void keyPressEvent(QKeyEvent *event);
 
   public slots:
     void closeShuttlePageSlot();

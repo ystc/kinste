@@ -39,6 +39,7 @@ class SingleCommandsTab : public QWidget
 
     void enable();
     void disable();
+    void execute(int command_tag, QComboBox *command_box);
 
   public slots:
     void buttonSetPosClicked();

@@ -117,7 +117,7 @@ class UserInterface : public QWidget
     void buttonSaveLogClicked();
 
    signals:
-    void connection(int connected);
+    void connection(int connected, bool sequence_status);
     void userInterfaceClosed();
 };
 #endif // USERINTERFACE_H

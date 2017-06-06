@@ -29,11 +29,12 @@ class ShuttlePageControl : public QObject
     Shuttle *shuttle;
 
   public slots:
-    void setConnection(int connection);
+    void setConnection(int connection, bool sequence_status);
     void interfaceClosed();
 
   signals:
-    void forwardConnectionSignal(int connection, QString shuttle_name);
+    void forwardConnectionSignal(int connection, QString shuttle_name,
+                                 bool sequence_status);
     void shuttleWindowClosed();
 };
 

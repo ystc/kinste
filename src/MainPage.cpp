@@ -49,10 +49,10 @@ MainPage::MainPage(int argc, char* argv[], MainPageControl* controller,
   connect(deleteShuttle, SIGNAL(pressed()), this, SLOT(closeShuttlePageSlot()));
   connect(disconnectShuttle, SIGNAL(pressed()),
           this, SLOT(disconnectShuttleSlot()));
+  connect(save, SIGNAL(pressed()), mainControl, SLOT(saveShuttleList()));
 
   logo->setObjectName("logo");
   body->setObjectName("body");
-  //foot->setObjectName("footer");
   list->setObjectName("listWidget");
   addShuttle->setProperty("button", true);
   deleteShuttle->setProperty("button", true);
@@ -69,9 +69,6 @@ MainPage::MainPage(int argc, char* argv[], MainPageControl* controller,
   bodyGrid->addWidget(deleteShuttle, 3, 0);
   bodyGrid->addWidget(disconnectShuttle, 3, 1);
   bodyGrid->addWidget(save, 3, 2);
-  //bodyGrid->setColumnStretch(0, 5);
-  //bodyGrid->setColumnStretch(1, 5);
-  //bodyGrid->setColumnStretch(2, 5);
   body->setLayout(bodyGrid);
 
   mainGrid->addWidget(logo, 0, 0);
@@ -167,12 +164,16 @@ void MainPage::disconnectShuttleSlot()
 }
 
 //------------------------------------------------------------------------------
-void MainPage::setConnection(int connected, QString name)
+void MainPage::setConnection(int connected, QString name, bool sequence_status)
 {
   QListWidgetItem *itemTemp;
   for(int count = 0; count < row_counter; count++){
     if(list->item(count)->text().split("\t")[0] == name){
       itemTemp = list->item(count);
+
+      if(sequence_status){
+        //TODO: show sequence status
+      }
 
       if(connected)
       {
@@ -195,4 +196,13 @@ void MainPage::showContextMenu(QPoint pos)
   myMenu.addAction("Delete", this, SLOT(closeShuttlePageSlot()));
   myMenu.addAction("Disconnect", this, SLOT(disconnectShuttleSlot()));
   myMenu.exec(globalPos);
+}
+
+//------------------------------------------------------------------------------
+void MainPage::keyPressEvent(QKeyEvent *event)
+{
+  if(event->key() == Qt::Key_Delete)
+  {
+    closeShuttlePageSlot();
+  }
 }
