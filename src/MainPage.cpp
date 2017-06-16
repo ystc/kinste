@@ -12,7 +12,7 @@
 #include "inc/UserInterface.h"
 #include "inc/Shuttle.h"
 
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 MainPage::MainPage(int argc, char* argv[], MainPageControl* controller,
                    QString directory_path, QWidget *parent) : QWidget(parent)
 {
@@ -38,6 +38,7 @@ MainPage::MainPage(int argc, char* argv[], MainPageControl* controller,
   list->setIconSize(QSize(60, 40));
   list->setFocus();
   list -> setContextMenuPolicy(Qt::CustomContextMenu);
+  list->installEventFilter(this);
 
   connect(list, SIGNAL(customContextMenuRequested(QPoint)), this,
     SLOT(showContextMenu(QPoint)));
@@ -199,10 +200,45 @@ void MainPage::showContextMenu(QPoint pos)
 }
 
 //------------------------------------------------------------------------------
-void MainPage::keyPressEvent(QKeyEvent *event)
+bool MainPage::eventFilter(QObject *obj, QEvent *event)
 {
-  if(event->key() == Qt::Key_Delete)
-  {
-    closeShuttlePageSlot();
+  if(obj == list){
+    if(event->type() == QKeyEvent::KeyPress){
+      if(((QKeyEvent*)event)->key() == Qt::Key_Delete){
+        closeShuttlePageSlot();
+      }
+      else if(((QKeyEvent*)event)->key() == Qt::Key_Return){
+        mainControl->showShuttlePage(list->currentItem());
+      }
+      else if(((QKeyEvent*)event)->key() == Qt::Key_Down){
+        if(list->currentRow() == list->count() - 1){
+          list->setCurrentRow(0);
+        }
+        else{
+          list->setCurrentRow(list->currentRow() + 1);
+        }
+      }
+      else if(((QKeyEvent*)event)->key() == Qt::Key_Up){
+        if(list->currentRow() == 0){
+          list->setCurrentRow(list->count() - 1);
+        }
+        else{
+          list->setCurrentRow(list->currentRow() - 1);
+        }
+      }
+      else if(((QKeyEvent*)event)->key() == Qt::Key_Left){
+        disconnectShuttleSlot();
+      }
+      else if(((QKeyEvent*)event)->key() == Qt::Key_Right){
+        mainControl->showShuttlePage(list->currentItem());
+      }
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  else{
+    return MainPage::eventFilter(obj, event);
   }
 }

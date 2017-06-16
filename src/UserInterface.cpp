@@ -273,7 +273,6 @@ void UserInterface::setShuttleData(QString current_position, float benergy,
         -> setStyleSheet("#batteryBar::chunk{background-color: green}");
   }
 
-
   if(cenergy < 30000)
   {
     capsEnergyBar

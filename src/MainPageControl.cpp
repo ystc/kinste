@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
 // Filename: MainPageControl.cpp
-// Author: Christoph Steinkellner
+// Author: ystc
 // Created: 03.03.2017
-// Last change: 18.04.2017
 //------------------------------------------------------------------------------
 
 #include "inc/MainPageControl.h"

@@ -1,12 +1,10 @@
 /**
   * Filename: MaintenanceTab.h
-  *
-  * Description: Additional Shuttle functions mainly for testing and solving errors.
-  *   Also includes functions to calibrate the Shuttle for first operation.
-  *
-  * Author: Christoph Steinkellner
+  * Description: Additional Shuttle functions mainly for testing and solving
+  *  errors.
+  *  Also includes functions to calibrate the Shuttle for first operation.
+  * Author: ystc
   * Created: 04.05.2016
-  * Last change: 19.08.2016
   */
 
 #ifndef MAINTENANCETAB_H_

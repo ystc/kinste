@@ -6,8 +6,7 @@
   *   a GUI, where everyone can easily create and start a test (sequence) for the Shuttles.
   *   The commands are added via Buttons+Lines and are saved in a QStringList. The list  is
   *   displayed on a QListWidget in the center, where you can always see what command is
-  *   currently processed. After the test you can save a statistic with the most important
-  *   collected data.
+  *   currently processed.
   *
   * Author: Christoph Steinkellner
   * Created: 04.05.2016

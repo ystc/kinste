@@ -1,3 +1,9 @@
+//------------------------------------------------------------------------------
+// Filename: MainPage.h
+// Author: ystc
+// Created: 03.03.2017
+//------------------------------------------------------------------------------
+
 #ifndef MAINPAGE_H
 #define MAINPAGE_H
 
@@ -49,7 +55,7 @@ class MainPage : public QWidget
 
   protected:
     void closeEvent(QCloseEvent *);
-    void keyPressEvent(QKeyEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
   public slots:
     void closeShuttlePageSlot();
